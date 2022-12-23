@@ -1,15 +1,14 @@
 import { Form, useFetcher, useLoaderData } from "react-router-dom";
-import { getContact, updateContact } from "../services/contacts";
+import { getContact, updateContact } from "../api/contact";
 
 export async function loader({ params }) {
   const contact = await getContact(params.contactId);
-  console.log(contact);
-  // if (!contact) {
-  //   throw new Response("", {
-  //     status: 404,
-  //     statusText: "Not Found",
-  //   });
-  // }
+  if (!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
   return contact;
 }
 

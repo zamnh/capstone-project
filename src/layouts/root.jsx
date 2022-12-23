@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Form, NavLink, Outlet, redirect, useLoaderData, useNavigation, useSubmit } from "react-router-dom";
-import { createContact, getContacts } from "../services/contacts";
+import { createContact, getContacts } from "../api/contact";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
-  const contacts = await getContacts(q);
+  const contacts = await getContacts(q ? q : "");
   return { contacts, q };
 }
 
@@ -41,7 +41,7 @@ export default function Root() {
               defaultValue={q}
               onChange={(e) => {
                 const isFirstSearch = q == null;
-                submit(e.currentTarget.form, {replace: !isFirstSearch});
+                submit(e.currentTarget.form, { replace: !isFirstSearch });
               }}
             />
             <div id="search-spinner" aria-hidden hidden={!searching} />

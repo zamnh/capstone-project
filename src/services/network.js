@@ -8,4 +8,48 @@ const instance = axios.create({
   timeout: 15000,
 });
 
-export default instance;
+class Network {
+  network;
+
+  constructor(network) {
+    this.network = network;
+  }
+
+  get(url, config) {
+    return this.network.get(url, config);
+  }
+
+  post(url, data, config) {
+    return this.network.post(url, data, {
+      ...config,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  put(url, data, config) {
+    return this.network.put(url, data, {
+      ...config,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  patch(url, data, config) {
+    return this.network.patch(url, data, {
+      ...config,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  delete(url, config) {
+    return this.network.delete(url, config);
+  }
+}
+
+const network = new Network(instance);
+export default network;
