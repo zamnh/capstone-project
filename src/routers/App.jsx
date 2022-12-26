@@ -5,6 +5,7 @@ import Contact, { loader as contactLoader, action as contactAction } from "../pa
 import { action as destroyAction } from "../pages/destroy";
 import EditContact, { action as editAction } from "../pages/edit";
 import ErrorPage from "../pages/error-page";
+import Hobby from "../pages/hobby/hobby";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "/hobby",
+    element: <Hobby />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
